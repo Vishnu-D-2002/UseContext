@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import Child from './components/child';
+import Child from './components/child.jsx';
 import './App.css'
 const context={
 "products": [
