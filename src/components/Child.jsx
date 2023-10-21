@@ -43,16 +43,16 @@ function Child() {
                     <h1 className='d-inline-block mx-3'> $ {selectedValues[product.id]}.00</h1>
                     <hr />
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <h2>SUBTOTAL :</h2>
-                      <h2>${selectedValues[product.id]}</h2>
+                      <h2  className='mx-3'>SUBTOTAL :</h2>
+                      <h2  className='mx-3'>${selectedValues[product.id]}</h2>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <h2>SHIPPING :</h2>
-                      <h2>FREE</h2>            
+                      <h2 className='mx-3'>SHIPPING :</h2>
+                      <h2  className='mx-3'>FREE</h2>            
                     </div><hr />
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <h2>TOTAL :</h2>
-                      <h2>${selectedValues[product.id]}</h2>
+                      <h2  className='mx-3'>TOTAL :</h2>
+                      <h2  className='mx-3'>${selectedValues[product.id]}</h2>
                     </div>  
                      </>
                            
