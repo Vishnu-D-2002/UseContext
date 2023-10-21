@@ -1,0 +1,15 @@
+.center{
+    text-align: center;
+    background-color: aqua;
+}
+#box{
+    border: 2px solid black;
+    margin-top: 2vh;
+    background-color: rgb(12, 241, 249);
+}
+p{
+    font-weight: bold;
+}
+.text-right {
+    text-align: right;
+}
