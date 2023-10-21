@@ -18,8 +18,8 @@ function Child() {
         {context.products.map(product => (
           <div key={product.id} >
             <div id="box" className="card-group">
-              <img className="card-img-top" style={{ maxWidth: '200px', maxHeight: '200px' }} src={product.thumbnail} alt={product.title} />
-              <h1 className="card-title d-inline-block">Brand: {product.brand}</h1>
+              <img className="card-img-top mt-5 mx-3" style={{ maxWidth: '200px', maxHeight: '200px' }} src={product.thumbnail} alt={product.title} />
+              <h1 className="card-title d-inline-block"> {product.brand}</h1>
               <div className="card-body">
                 <h2 className="card-title mx-5 text-center">{product.title}</h2>
                 <p className="card-text m-5">
