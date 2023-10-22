@@ -29,11 +29,11 @@ p{
     align-items: flex-end;
     justify-content: center;
 }
-@media screen and (max-width:500px) {
+@media screen and (max-width:460px) {
     #boxs{
         margin-left: 45px;
-        width: 400px;
-        margin-right: 45px;
+        width: 360px;
+        margin-right: 5px;
         margin-bottom: 30px;
     }
 }
