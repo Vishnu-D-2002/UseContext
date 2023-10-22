@@ -29,3 +29,8 @@ p{
     align-items: flex-end;
     justify-content: center;
 }
+@media screen and (max-width:500px) {
+    #boxs{
+        margin-left: 10px;
+    }
+}
