@@ -31,6 +31,7 @@ p{
 }
 @media screen and (max-width:500px) {
     #boxs{
-        margin-left: 10px;
+        margin-left: 45px;
+        width: 400px;
     }
 }
