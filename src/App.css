@@ -33,5 +33,7 @@ p{
     #boxs{
         margin-left: 45px;
         width: 400px;
+        margin-right: 45px;
+        margin-bottom: 30px;
     }
 }
