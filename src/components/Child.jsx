@@ -17,11 +17,11 @@ function Child() {
       <div className="row">
         {context.products.map(product => (
           <div key={product.id} >
-            <div id="box" className="card-group">
-              <img className="card-img-top mt-5 mx-3" style={{ maxWidth: '200px', maxHeight: '200px' }} src={product.thumbnail} alt={product.title} />
-              <h1 className="card-title d-inline-block"> {product.brand}</h1>
+            <div id="box" className="card-group" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <h1 className="card-title text-center mt-3"> {product.brand}</h1><br />
+              <img className="card-img d-block mt-3 mx-3 " style={{ maxWidth: '200px', maxHeight: '200px' }} src={product.thumbnail} alt={product.title} />
               <div className="card-body">
-                <h2 className="card-title mx-5 text-center">{product.title}</h2>
+                <h2 className="card-title mx-5 mt-3 text-center">{product.title}</h2>
                 <p className="card-text m-5">
                   {`Description: ${product.description}`}<br />
                   {`Rating: ${product.rating} *`}<br />
@@ -57,6 +57,7 @@ function Child() {
                      </>
                            
                 )}
+
               </div>
             </div>
           </div>

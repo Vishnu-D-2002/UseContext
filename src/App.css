@@ -5,9 +5,11 @@
 #box{
     border: 2px solid black;
     border-radius: 10px;
-    margin: 30px;
+    margin-left: 35%;
     margin-top: 2vh;
     background-color: rgb(12, 241, 249);
+    width: 500px;
+    /* height: 400px; */
 }
 p{
     font-weight: bold;
@@ -15,3 +17,23 @@ p{
 .text-right {
     text-align: right;
 }
+.img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        /* Adjust the width and height as needed */
+        height: 200px;
+        border: 1px solid #ccc;
+        /* Adding a border for the card */
+    }
+       /* @media (max-width: 500px) {
+            #box {
+                border: 2px solid black;
+                border-radius: 10px;
+                margin-top: 2vh;
+                background-color: rgb(12, 241, 249);
+                width: 500px;
+            }
+        }
+        */
