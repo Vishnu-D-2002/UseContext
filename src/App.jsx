@@ -11,6 +11,9 @@ function App() {
 
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  // Create a state to keep track of selected quantities and content visibility
+  const [selectedQuantities, setSelectedQuantities] = useState({});
+
   const handleQuantityChange = (productId, quantity) => {
     dispatch({
       type: 'PRICE',
@@ -20,6 +23,12 @@ function App() {
       },
     });
     setSelectedProduct(productId);
+
+    // Update the selectedQuantities state
+    setSelectedQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: quantity,
+    }));
   };
 
   return (
@@ -45,6 +54,7 @@ function App() {
                   <select
                     className="card-quantity"
                     onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                    value={selectedQuantities[product.id] || 0}
                   >
                     <option value="0">Select Quantity</option>
                     <option value="1">1</option>
@@ -53,11 +63,11 @@ function App() {
                     <option value="4">4</option>
                     <option value="5">5</option>
                   </select>
-                  {selectedProduct === product.id && (
-                    <div>
-                      <p><strong>SUBTOTAL:</strong> $ {product.price * (quantities[product.id] || 1)}</p>
+                  {selectedQuantities[product.id] !== undefined && (
+                    <div className='mt-3'>
+                      <p><strong>SUBTOTAL:</strong> $ {product.price * selectedQuantities[product.id]}</p>
                       <p><strong>SHIPPING:</strong> FREE</p>
-                      <p><strong>TOTAL:</strong> $ {product.price * (quantities[product.id] || 1)}</p>
+                      <p><strong>TOTAL:</strong> $ {product.price * selectedQuantities[product.id]}</p>
                     </div>
                   )}
                 </div>
