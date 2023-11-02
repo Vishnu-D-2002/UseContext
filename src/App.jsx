@@ -1,111 +1,73 @@
-import React, { createContext, useState } from 'react';
-import Child from './components/Child';
-import './App.css'
-const context={
-"products": [
-    {
-        "id": 1,
-        "title": "iPhone 9",
-        "description": "An apple mobile which is nothing like apple",
-        "price": 549,
-        "discountPercentage": 12.96,
-        "rating": 4.69,
-        "stock": 94,
-        "brand": "Apple",
-        "category": "smartphones",
-        "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-        "images": [
-            "https://i.dummyjson.com/data/products/1/1.jpg",
-            "https://i.dummyjson.com/data/products/1/2.jpg",
-            "https://i.dummyjson.com/data/products/1/3.jpg",
-            "https://i.dummyjson.com/data/products/1/4.jpg",
-            "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
-        ]
-    },
-    {
-        "id": 2,
-        "title": "iPhone X",
-        "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-        "price": 899,
-        "discountPercentage": 17.94,
-        "rating": 4.44,
-        "stock": 34,
-        "brand": "Apple",
-        "category": "smartphones",
-        "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-        "images": [
-            "https://i.dummyjson.com/data/products/2/1.jpg",
-            "https://i.dummyjson.com/data/products/2/2.jpg",
-            "https://i.dummyjson.com/data/products/2/3.jpg",
-            "https://i.dummyjson.com/data/products/2/thumbnail.jpg"
-        ]
-    },
-    {
-        "id": 3,
-        "title": "Samsung Universe 9",
-        "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-        "price": 1249,
-        "discountPercentage": 15.46,
-        "rating": 4.09,
-        "stock": 36,
-        "brand": "Samsung",
-        "category": "smartphones",
-        "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-        "images": [
-            "https://i.dummyjson.com/data/products/3/1.jpg"
-        ]
-    },
-    {
-        "id": 4,
-        "title": "OPPOF19",
-        "description": "OPPO F19 is officially announced on April 2021.",
-        "price": 280,
-        "discountPercentage": 17.91,
-        "rating": 4.3,
-        "stock": 123,
-        "brand": "OPPO",
-        "category": "smartphones",
-        "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
-        "images": [
-            "https://i.dummyjson.com/data/products/4/1.jpg",
-            "https://i.dummyjson.com/data/products/4/2.jpg",
-            "https://i.dummyjson.com/data/products/4/3.jpg",
-            "https://i.dummyjson.com/data/products/4/4.jpg",
-            "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
-        ]
-    },
-    {
-        "id": 5,
-        "title": "Huawei P30",
-        "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
-        "price": 499,
-        "discountPercentage": 10.58,
-        "rating": 4.09,
-        "stock": 32,
-        "brand": "Huawei",
-        "category": "smartphones",
-        "thumbnail": "https://i.dummyjson.com/data/products/5/thumbnail.jpg",
-        "images": [
-            "https://i.dummyjson.com/data/products/5/1.jpg",
-            "https://i.dummyjson.com/data/products/5/2.jpg",
-            "https://i.dummyjson.com/data/products/5/3.jpg"
-        ]
-    }
-]
-}
-
-
-const MyContext = createContext();
+// App.jsx
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import './App.css';
 
 function App() {
+  const dispatch = useDispatch();
+
+  const products = useSelector((state) => state.products);
+  const quantities = useSelector((state) => state.quantities);
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleQuantityChange = (productId, quantity) => {
+    dispatch({
+      type: 'PRICE',
+      payload: {
+        productId,
+        quantity,
+      },
+    });
+    setSelectedProduct(productId);
+  };
 
   return (
-    <div>
-          <MyContext.Provider value={{context}}>
-              <Child />
-          </MyContext.Provider>
+    <div className="container-fluid bg-light">
+      <div className="row">
+        <div className="col-12 d-flex justify-content-center">
+          <div className="card-columns mt-5">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className={`card mt-5 ${selectedProduct === product.id ? 'selected' : ''}`}
+              >
+                <h1 className="card-title text-center m-3 mb-4">{product.title}</h1>
+                <img src={product.thumbnail} alt={product.title} className="card-img-top mx-auto mb-4" style={{ width: '250px' }} height='200px'/>
+                <div className="card-body">
+                  <p className="card-text">{product.description}</p>
+                  <p><strong>Rating: </strong>{product.rating}</p>
+                  <p><strong>Discount: </strong>{product.discountPercentage}%</p>
+                  <p><strong>Category: </strong>{product.category}</p>
+                  <p><strong>Stock: </strong>{product.stock}</p>
+                  <h4 className="card-price">${product.price}</h4>
+                  <label><strong>Quantity: </strong></label>&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="card-quantity"
+                    onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                  >
+                    <option value="0">Select Quantity</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  {selectedProduct === product.id && (
+                    <div>
+                      <p><strong>SUBTOTAL:</strong> $ {product.price * (quantities[product.id] || 1)}</p>
+                      <p><strong>SHIPPING:</strong> FREE</p>
+                      <p><strong>TOTAL:</strong> $ {product.price * (quantities[product.id] || 1)}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
 
-export {App as default,MyContext}
+export default App;
