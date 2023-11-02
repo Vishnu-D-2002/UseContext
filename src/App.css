@@ -2,7 +2,7 @@
     width: 250px;
     margin: 50px;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px rgb(163, 131, 131);
+    box-shadow: 5px 5px 5px rgb(74, 53, 87);
 }
 
 .all {
@@ -13,8 +13,10 @@
     border: 1px solid #000;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: rgb(230, 230, 225);
+    background-color: rgb(207, 254, 238);
     border-radius: 20px;
+    margin-left: 15px;
+    margin-top: 25px;
 }
 
 .insidebox {

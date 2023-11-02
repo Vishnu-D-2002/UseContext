@@ -42,16 +42,16 @@ function App() {
             <p className='remove'>Remove</p>
           </div>
           <hr />
-          <p className='left'>SUBTOTAL:</p>
+          <p className='left'><strong>SUBTOTAL:</strong></p>
           <span className='rightside'>
             <h4>$ {val.price * (quantities[val.id] || 1)}</h4>
           </span>
-          <p className='left'>SHIPPING:</p>
+          <p className='left'><strong>SHIPPING:</strong></p>
           <span className='rightside'>
             <h4>FREE</h4>
           </span>
           <hr />
-          <p className='left'>TOTAL:</p>
+          <p className='left'><strong>TOTAL:</strong></p>
           <span className='rightside'>
             <h4>$ {val.price * (quantities[val.id] || 1)}</h4>
           </span>
