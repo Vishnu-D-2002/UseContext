@@ -1,9 +1,9 @@
-// index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import App from './App.jsx';
+import { createRoot } from 'react-dom/client';
 
 const initialState = {
   products: [],
@@ -34,7 +34,6 @@ const priceData = (state = initialState, action) => {
 };
 
 const store = createStore(priceData);
-
 store.dispatch({
   type: 'DATA',
   payload: {
@@ -131,9 +130,11 @@ store.dispatch({
   },
 });
 
-ReactDOM.render(
+
+const root = document.getElementById('root');
+const rootElement = createRoot(root);
+rootElement.render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );
