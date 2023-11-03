@@ -1,62 +1,81 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import "./App.css"
+// App.jsx
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import './App.css';
+
 function App() {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
   const quantities = useSelector((state) => state.quantities);
 
-  return (
-    <div>
-      {products.map((val) => (
-        <div key={val.id} className='all'>
-          <div className='insidebox'>
-            <img src={val.thumbnail} alt={val.title} className='photo' />
-            <div className='info'>
-              <h2 className='title'>{val.title}</h2>
-              <p>{val.description}</p>
-            </div>
-          </div>
-          <div className='right'>
-            <select
-              className='selection'
-              onChange={(e) => {
-                dispatch({
-                  type: 'PRICE',
-                  payload: {
-                    productId: val.id,
-                    quantity: parseInt(e.target.value),
-                  },
-                });
-              }}
-            >
-              <option value='1'>1</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5</option>
-            </select>
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-            <h4 id='pi'>${val.price}</h4>
-            <p className='remove'>Remove</p>
+  // Create a state to keep track of selected quantities and content visibility
+  const [selectedQuantities, setSelectedQuantities] = useState({});
+
+  const handleQuantityChange = (productId, quantity) => {
+    dispatch({
+      type: 'PRICE',
+      payload: {
+        productId,
+        quantity,
+      },
+    });
+    setSelectedProduct(productId);
+
+    // Update the selectedQuantities state
+    setSelectedQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [productId]: quantity,
+    }));
+  };
+
+  return (
+    <div className="container-fluid bg-light">
+      <div className="row">
+        <div className="col-12 d-flex justify-content-center">
+          <div className="card-columns mt-5">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className={`card mt-5 ${selectedProduct === product.id ? 'selected' : ''}`}
+              >
+                <h1 className="card-title text-center m-3 mb-4">{product.title}</h1>
+                <img src={product.thumbnail} alt={product.title} className="card-img-top mx-auto mb-4" style={{ width: '250px' }} height='200px'/>
+                <div className="card-body">
+                  <p className="card-text">{product.description}</p>
+                  <p><strong>Rating: </strong>{product.rating}</p>
+                  <p><strong>Discount: </strong>{product.discountPercentage}%</p>
+                  <p><strong>Category: </strong>{product.category}</p>
+                  <p><strong>Stock: </strong>{product.stock}</p>
+                  <h4 className="card-price">${product.price}</h4>
+                  <label><strong>Quantity: </strong></label>&nbsp;&nbsp;&nbsp;
+                  <select
+                    className="card-quantity"
+                    onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
+                    value={selectedQuantities[product.id] || 0}
+                  >
+                    <option value="0">Select Quantity</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  {selectedQuantities[product.id] !== undefined && (
+                    <div className='mt-3'>
+                      <p><strong>SUBTOTAL:</strong> $ {product.price * selectedQuantities[product.id]}</p>
+                      <p><strong>SHIPPING:</strong> FREE</p>
+                      <p><strong>TOTAL:</strong> $ {product.price * selectedQuantities[product.id]}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
-          <hr />
-          <p className='left'><strong>SUBTOTAL:</strong></p>
-          <span className='rightside'>
-            <h4>$ {val.price * (quantities[val.id] || 1)}</h4>
-          </span>
-          <p className='left'><strong>SHIPPING:</strong></p>
-          <span className='rightside'>
-            <h4>FREE</h4>
-          </span>
-          <hr />
-          <p className='left'><strong>TOTAL:</strong></p>
-          <span className='rightside'>
-            <h4>$ {val.price * (quantities[val.id] || 1)}</h4>
-          </span>
         </div>
-      ))}
+      </div>
     </div>
   );
 }

@@ -1,91 +1,25 @@
-.photo {
-    width: 250px;
-    margin: 50px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px rgb(74, 53, 87);
+.card-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
 
-.all {
-    width: 100%;
-    height: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border: 1px solid #000;
+.card {
+    flex: 1;
+    margin: 20px;
     padding: 10px;
-    margin-bottom: 10px;
-    background-color: rgb(207, 254, 238);
-    border-radius: 20px;
-    margin-left: 15px;
-    margin-top: 25px;
+    background-color: rgb(183, 241, 252);
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    width: 60vw;
 }
 
-.insidebox {
-    grid-column: span 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    /* Align items to the top */
+.card:hover {
+    transform: scale(1.05);
 }
 
-.info {
-    margin-top: 50px;
-}
-
-#pi {
-    display: inline;
-    margin-left: 40px;
-}
-
-.remove {
-    color: red;
-    margin-top: 20%;
-}
-
-.right {
-    text-align: right;
-    margin-right: 30px;
-}
-
-.selection {
-    margin-top: 50px;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #000;
-    grid-column: span 2;
-}
-
-.rightside {
-    text-align: right;
-    margin-right: 30px;
-}
-
-@media screen and (max-width: 500px) {
-    .all {
-        grid-template-columns: 1fr;
-    }
-
-    .insidebox {
-        grid-template-columns: 1fr;
-    }
-
-    .right {
-        text-align: left;
-        margin-right: 0;
-    }
-
-    .rightside {
-
-        text-align: justify;
-    }
-
-    .left {
-
-        text-align: justify;
-    }
-
-    hr {
-        grid-column: span 1;
-    }
+.selected {
+    border: 2px solid blue;
 }
