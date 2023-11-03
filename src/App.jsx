@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
@@ -11,7 +10,6 @@ function App() {
 
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Create a state to keep track of selected quantities and content visibility
   const [selectedQuantities, setSelectedQuantities] = useState({});
 
   const handleQuantityChange = (productId, quantity) => {
@@ -49,7 +47,7 @@ function App() {
                   <p><strong>Discount: </strong>{product.discountPercentage}%</p>
                   <p><strong>Category: </strong>{product.category}</p>
                   <p><strong>Stock: </strong>{product.stock}</p>
-                  <h4 className="card-price">${product.price}</h4>
+                  <h4 className="card-price"><strong>Price : </strong>${product.price}</h4>
                   <label><strong>Quantity: </strong></label>&nbsp;&nbsp;&nbsp;
                   <select
                     className="card-quantity"
@@ -65,11 +63,20 @@ function App() {
                   </select>
                   {selectedQuantities[product.id] !== undefined && (
                     <div className='mt-3'>
-                      <p><strong>SUBTOTAL:</strong> $ {product.price * selectedQuantities[product.id]}</p>
-                      <p><strong>SHIPPING:</strong> FREE</p>
-                      <p><strong>TOTAL:</strong> $ {product.price * selectedQuantities[product.id]}</p>
+                      <div className="row">
+                        <div className="col-6">
+                          <h3><strong>SUBTOTAL :</strong></h3>
+                          <h2 className='mt-3'><strong>SHIPPING :</strong></h2>
+                          <h1><strong>TOTAL :</strong></h1>
+                        </div>
+                        <div className="col-6 text-end">
+                          <p><h3>$ {product.price * selectedQuantities[product.id]}</h3></p>
+                          <h2><strong>FREE</strong></h2>
+                          <p><h1>$ {product.price * selectedQuantities[product.id]}</h1></p>
+                        </div>
+                      </div>
                     </div>
-                  )}
+                    )}
                 </div>
               </div>
             ))}
