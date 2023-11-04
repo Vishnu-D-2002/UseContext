@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 
@@ -8,10 +8,6 @@ function App() {
   const products = useSelector((state) => state.products);
   const quantities = useSelector((state) => state.quantities);
 
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const [selectedQuantities, setSelectedQuantities] = useState({});
-
   const handleQuantityChange = (productId, quantity) => {
     dispatch({
       type: 'PRICE',
@@ -20,13 +16,6 @@ function App() {
         quantity,
       },
     });
-    setSelectedProduct(productId);
-
-    // Update the selectedQuantities state
-    setSelectedQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [productId]: quantity,
-    }));
   };
 
   return (
@@ -37,7 +26,7 @@ function App() {
             {products.map((product) => (
               <div
                 key={product.id}
-                className={`card mt-5 ${selectedProduct === product.id ? 'selected' : ''}`}
+                className={`card mt-5 ${quantities[product.id] > 0 ? 'selected' : ''}`}
               >
                 <h1 className="card-title text-center m-3 mb-4">{product.title}</h1>
                 <div className="card-image-container" style={{ position: 'relative' }}>
@@ -53,7 +42,7 @@ function App() {
                     <select
                       className="card-quantity"
                       onChange={(e) => handleQuantityChange(product.id, parseInt(e.target.value))}
-                      value={selectedQuantities[product.id] || 0}
+                      value={quantities[product.id] || 0}
                     >
                       <option value="0">0</option>
                       <option value="1">1</option>
@@ -70,13 +59,13 @@ function App() {
                   <p><strong>Discount: </strong>{product.discountPercentage}%</p>
                   <p><strong>Category: </strong>{product.category}</p>
                   <p><strong>Stock: </strong>{product.stock}</p>
-                  <div className={`mt-3 ${selectedQuantities[product.id] === undefined ? 'd-none' : ''}`}>
+                  <div className={`mt-3 ${quantities[product.id] === undefined ? 'd-none' : ''}`}>
                     <div className="container">
                       <div>
                         <div>
                           <div className="d-flex justify-content-between align-items-center mb-3">
                             <h3><strong>SUBTOTAL :</strong></h3>
-                            <h3 className="text-end">$ {product.price * selectedQuantities[product.id]}</h3>
+                            <h3 className="text-end">$ {product.price * quantities[product.id]}</h3>
                           </div>
                           <div className="d-flex justify-content-between align-items-center mb-3">
                             <h3 ><strong>SHIPPING :</strong></h3>
@@ -84,7 +73,7 @@ function App() {
                           </div>
                           <div className="d-flex justify-content-between">
                             <h3><strong>TOTAL :</strong></h3>
-                            <h3 className="text-end">$ {product.price * selectedQuantities[product.id]}</h3>
+                            <h3 className="text-end">$ {product.price * quantities[product.id]}</h3>
                           </div>
                         </div>
                       </div>
