@@ -47,7 +47,7 @@ function App() {
                     className="card-img-top"
                     style={{ width: '100%', height: 'auto', maxWidth: '200px' }}
                   />
-                  <div className="price-quantity-container" style={{ position: 'absolute', top: '0', right: '0', padding: '8px', background: 'rgba(255, 255, 255, 0.8' }}>
+                  <div className="price-quantity-container" style={{ position: 'absolute', top: '0', right: '0', padding: '8px', background: 'rgba(255, 255, 255, 0.8)' }}>
                     <p><strong>${product.price}</strong></p>
                     <label><strong></strong></label>
                     <select
@@ -71,16 +71,22 @@ function App() {
                   <p><strong>Category: </strong>{product.category}</p>
                   <p><strong>Stock: </strong>{product.stock}</p>
                   <div className={`mt-3 ${selectedQuantities[product.id] === undefined ? 'd-none' : ''}`}>
-                    <div className="row">
-                      <div className="col-6">
-                        <h3><strong>SUBTOTAL :</strong></h3>
-                        <h3><strong>SHIPPING :</strong></h3>
-                        <h3><strong>TOTAL :</strong></h3>
-                      </div>
-                      <div className="col-6 text-end">
-                        <h3>$ {product.price * selectedQuantities[product.id]}</h3>
-                        <h3><strong>FREE</strong></h3>
-                        <h3>$ {product.price * selectedQuantities[product.id]}</h3>
+                    <div className="container">
+                      <div>
+                        <div>
+                          <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h3><strong>SUBTOTAL :</strong></h3>
+                            <h3 className="text-end">$ {product.price * selectedQuantities[product.id]}</h3>
+                          </div>
+                          <div className="d-flex justify-content-between align-items-center mb-3">
+                            <h3 ><strong>SHIPPING :</strong></h3>
+                            <h3 className="text-end"><strong>FREE</strong></h3>
+                          </div>
+                          <div className="d-flex justify-content-between">
+                            <h3><strong>TOTAL :</strong></h3>
+                            <h3 className="text-end">$ {product.price * selectedQuantities[product.id]}</h3>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
