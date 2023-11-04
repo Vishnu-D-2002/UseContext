@@ -74,13 +74,13 @@ function App() {
                     <div className="row">
                       <div className="col-6">
                         <h3><strong>SUBTOTAL :</strong></h3>
-                        <h2 className='mt-3'><strong>SHIPPING :</strong></h2>
-                        <h1><strong>TOTAL :</strong></h1>
+                        <h3><strong>SHIPPING :</strong></h3>
+                        <h3><strong>TOTAL :</strong></h3>
                       </div>
                       <div className="col-6 text-end">
-                        <p><h3>$ {product.price * selectedQuantities[product.id]}</h3></p>
-                        <h2><strong>FREE</strong></h2>
-                        <p><h1>$ {product.price * selectedQuantities[product.id]}</h1></p>
+                        <h3>$ {product.price * selectedQuantities[product.id]}</h3>
+                        <h3><strong>FREE</strong></h3>
+                        <h3>$ {product.price * selectedQuantities[product.id]}</h3>
                       </div>
                     </div>
                   </div>
